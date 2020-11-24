@@ -2,7 +2,7 @@
 
 
 #
-# day 10 - more about functions
+# day 10 - more about functions, return, multiple return, recursion
 #
 
 # def my_function():
@@ -77,6 +77,8 @@
 #
 #
 
+from calculator_art import logo
+
 #add
 def add(n1, n2):
   return n1 + n2
@@ -93,6 +95,7 @@ def multiply(n1, n2):
 def divide(n1, n2):
   return n1 / n2
 
+
 operations = {"add": "+", "subtract": "-", "multiply": "*", "divide": "/"}
 
 operations = {
@@ -102,21 +105,35 @@ operations = {
 "/": divide
 }
 
-num1 = int(input("Whats the first number? "))
+def calculator():
+  print(logo)
+  
+  should_continue = True
 
-for symbol in operations:
-  print(symbol)
+  num1 = float(input("Whats the first number? "))
 
-operation_symbol = input("Pick a symbol from the list above: ")
-num2 = int(input("Whats the second number? "))
+  while should_continue:
 
-#example
-#function = operations["*"]
-#print(function(2,3))
+    for symbol in operations:
+      print(symbol)
 
-calculation_function = operations[operation_symbol]
-answer = calculation_function(num1, num2)
+    operation_symbol = input("Pick a symbol from the list above: ")
+    num2 = float(input("Whats the second number? "))
 
-print(f"{num1} {operation_symbol} {num2} = {answer} ")
+    #function = operations["*"]
+    #print(function(2,3))
+    
+    calculation_function = operations[operation_symbol]
+    answer = calculation_function(num1, num2)
+
+    print(f"{num1} {operation_symbol} {num2} = {answer} ")
 
 
+    if input(f"Type 'y' to continue calculation with {answer}, or type 'n' to start a new calculation: ") == "y":
+      num1 = answer
+    else:
+      should_continue = False
+      calculator()
+
+
+calculator()
